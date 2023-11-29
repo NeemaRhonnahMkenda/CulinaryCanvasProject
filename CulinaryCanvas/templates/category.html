@@ -1,0 +1,398 @@
+{% load static %}
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <title>Parsa | Portfolio Template</title>
+
+    <!-- mobile responsive meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- ** Plugins Needed for the Project ** -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'app/plugins/bootstrap/bootstrap.min.css' %}">
+    <!-- slick slider -->
+    <link rel="stylesheet" href="{% static 'app/plugins/slick/slick.css' %}">
+    <!-- themefy-icon -->
+    <link rel="stylesheet" href="{% static 'app/plugins/themify-icons/themify-icons.css' %}">
+
+    <!-- Main Stylesheet -->
+    <link href="{% static 'app/css/style.css' %}" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="{% static 'app/images/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'app/images/favicon.ico' %}" type="image/x-icon">
+
+</head>
+
+<body>
+<!-- preloader -->
+<div class="preloader">
+    <div class="loader">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- /preloader -->
+
+<header class="navigation">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.html">
+            <img class="img-fluid" style="height: 100px" src="{% static 'app/images/Culinary.png' %}" alt="parsa">Culinary
+            Canvas
+            {#        <p style="font-size: 30px; color: #fd308c;"><span class="font-weight-bold" style="font-size: 36px; color: darkred;">C</span><i>ulinary</i> <span class="font-weight-bold" style="font-size: 36px; color: darkred;">C</span><i>anvas</i></p>#}
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+                aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse text-center" id="navogation">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase text-dark" href="category.html">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blogPostEntry' %}"><i class="ti-pencil-alt mr-2"></i>Write</a>
+                </li>
+            </ul>
+            <form class="form-inline position-relative ml-lg-4">
+                <input class="form-control px-0 w-100" type="search" placeholder="Search">
+                <!-- <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button> -->
+                <a href="search.html" class="search-icon"><i class="ti-search text-dark"></i></a>
+            </form>
+        </div>
+        <div class="ml-5">
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}">
+                    <div class="d-flex flex-column align-items-center">
+                        <span class="text-dark mb"><span class="font-italic">Welcome Back</span></span>
+                        <span class="text-dark"><span class="font-weight-bold"
+                                                      style="font-size: 20px; color: darkorange">{{ user.first_name }} {{ user.last_name }}!</span></span>
+                    </div>
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary rounded shadow">Login</a>
+                <a href="{% url 'signup' %}" class="btn btn-primary rounded shadow">Signup</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+
+<!-- page-title -->
+<section class="section bg-secondary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Blog Posts</h4>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /page-title -->
+
+<!-- category post -->
+{#<section>#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-8">#}
+{#                <div class="row masonry-container pt-5">#}
+{#                    <div class="col-sm-6 mb-5">#}
+{#                        <article class="text-center">#}
+{#                            <img class="img-fluid mb-4" src="{% static 'app/images/masonary-post/post-1.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                            <p class="text-uppercase mb-2">TRAVEL</p>#}
+{#                            <h4 class="title-border"><a class="text-dark" href="blog-single.html">Charming Evening#}
+{#                                Field</a></h4>#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+{#                                incididunt ut labore et#}
+{#                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris#}
+{#                                nisi ut aliquip#}
+{#                                ex#}
+{#                                ea commodo consequat.</p>#}
+{#                            <a href="blog-single.html" class="btn btn-transparent">read more</a>#}
+{#                        </article>#}
+{#                    </div>#}
+{#                    <div class="col-sm-6 mb-5">#}
+{#                        <article class="text-center">#}
+{#                            <img class="img-fluid mb-4" src="{% static 'app/images/masonary-post/post-2.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                            <p class="text-uppercase mb-2">TRAVEL</p>#}
+{#                            <h4 class="title-border"><a class="text-dark" href="blog-single.html">Charming Evening#}
+{#                                Field</a></h4>#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+{#                                incididunt ut labore et#}
+{#                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris#}
+{#                                nisi ut aliquip#}
+{#                                ex#}
+{#                                ea commodo consequat.</p>#}
+{#                            <a href="blog-single.html" class="btn btn-transparent">read more</a>#}
+{#                        </article>#}
+{#                    </div>#}
+{#                    <div class="col-sm-6 mb-5">#}
+{#                        <article class="text-center">#}
+{#                            <img class="img-fluid mb-4" src="{% static 'app/images/masonary-post/post-3.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                            <p class="text-uppercase mb-2">TRAVEL</p>#}
+{#                            <h4 class="title-border"><a class="text-dark" href="blog-single.html">Charming Evening#}
+{#                                Field</a></h4>#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+{#                                incididunt ut labore et#}
+{#                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris#}
+{#                                nisi ut aliquip#}
+{#                                ex#}
+{#                                ea commodo consequat.</p>#}
+{#                            <a href="blog-single.html" class="btn btn-transparent">read more</a>#}
+{#                        </article>#}
+{#                    </div>#}
+{#                    <div class="col-sm-6 mb-5">#}
+{#                        <article class="text-center">#}
+{#                            <img class="img-fluid mb-4" src="{% static 'app/images/masonary-post/post-4.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                            <p class="text-uppercase mb-2">TRAVEL</p>#}
+{#                            <h4 class="title-border"><a class="text-dark" href="blog-single.html">Charming Evening#}
+{#                                Field</a></h4>#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+{#                                incididunt ut labore et#}
+{#                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris#}
+{#                                nisi ut aliquip#}
+{#                                ex#}
+{#                                ea commodo consequat.</p>#}
+{#                            <a href="blog-single.html" class="btn btn-transparent">read more</a>#}
+{#                        </article>#}
+{#                    </div>#}
+{#                    <div class="col-sm-6 mb-5">#}
+{#                        <article class="text-center">#}
+{#                            <img class="img-fluid mb-4" src="{% static 'app/images/masonary-post/post-8.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                            <p class="text-uppercase mb-2">TRAVEL</p>#}
+{#                            <h4 class="title-border"><a class="text-dark" href="blog-single.html">Charming Evening#}
+{#                                Field</a></h4>#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+{#                                incididunt ut labore et#}
+{#                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris#}
+{#                                nisi ut aliquip#}
+{#                                ex#}
+{#                                ea commodo consequat.</p>#}
+{#                            <a href="blog-single.html" class="btn btn-transparent">read more</a>#}
+{#                        </article>#}
+{#                    </div>#}
+{#                    <div class="col-sm-6 mb-5">#}
+{#                        <article class="text-center">#}
+{#                            <img class="img-fluid mb-4" src="{% static 'app/images/masonary-post/post-10.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                            <p class="text-uppercase mb-2">TRAVEL</p>#}
+{#                            <h4 class="title-border"><a class="text-dark" href="blog-single.html">Charming Evening#}
+{#                                Field</a></h4>#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+{#                                incididunt ut labore et#}
+{#                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris#}
+{#                                nisi ut aliquip#}
+{#                                ex#}
+{#                                ea commodo consequat.</p>#}
+{#                            <a href="blog-single.html" class="btn btn-transparent">read more</a>#}
+{#                        </article>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row">#}
+{#                    <div class="col-12">#}
+{#                        <nav>#}
+{#                            <ul class="pagination justify-content-center align-items-center">#}
+{#                                <li class="page-item">#}
+{#                                    <span class="page-link">&laquo; Previous</span>#}
+{#                                </li>#}
+{#                                <li class="page-item"><a class="page-link" href="#">01</a></li>#}
+{#                                <li class="page-item active">#}
+{#                                    <span class="page-link">02</span>#}
+{#                                </li>#}
+{#                                <li class="page-item"><a class="page-link" href="#">03</a></li>#}
+{#                                <li class="page-item"><a class="page-link" href="#">04</a></li>#}
+{#                                <li class="page-item"><a class="page-link" href="#">05</a></li>#}
+{#                                <li class="page-item"><a class="page-link" href="#">06</a></li>#}
+{#                                <li class="page-item">#}
+{#                                    <a class="page-link" href="#">Next &raquo;</a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </nav>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <!-- /blog post -->#}
+{#            <div class="col-lg-4">#}
+{#                <div class="widget search-box">#}
+{#                    <i class="ti-search"></i>#}
+{#                    <input type="search" id="search-post" class="form-control border-0 pl-5" name="search-post"#}
+{#                           placeholder="Search">#}
+{#                </div>#}
+{#                <div class="widget">#}
+{#                    <h6 class="mb-4">LATEST POST</h6>#}
+{#                    <div class="media mb-4">#}
+{#                        <div class="post-thumb-sm mr-3">#}
+{#                            <img class="img-fluid" src="{% static 'app/images/masonary-post/post-1.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                        </div>#}
+{#                        <div class="media-body">#}
+{#                            <ul class="list-inline d-flex justify-content-between mb-2">#}
+{#                                <li class="list-inline-item">Post By Jhon</li>#}
+{#                                <li class="list-inline-item">June 2, 2018</li>#}
+{#                            </ul>#}
+{#                            <h6><a class="text-dark" href="blog-single.html">Lorem ipsum dolor sit amet, consectetur</a>#}
+{#                            </h6>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="media mb-4">#}
+{#                        <div class="post-thumb-sm mr-3">#}
+{#                            <img class="img-fluid" src="{% static 'app/images/masonary-post/post-6.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                        </div>#}
+{#                        <div class="media-body">#}
+{#                            <ul class="list-inline d-flex justify-content-between mb-2">#}
+{#                                <li class="list-inline-item">Post By Jhon</li>#}
+{#                                <li class="list-inline-item">June 2, 2018</li>#}
+{#                            </ul>#}
+{#                            <h6><a class="text-dark" href="blog-single.html">Lorem ipsum dolor sit amet, consectetur</a>#}
+{#                            </h6>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="media mb-4">#}
+{#                        <div class="post-thumb-sm mr-3">#}
+{#                            <img class="img-fluid" src="{% static 'app/images/masonary-post/post-3.jpg' %}"#}
+{#                                 alt="post-thumb">#}
+{#                        </div>#}
+{#                        <div class="media-body">#}
+{#                            <ul class="list-inline d-flex justify-content-between mb-2">#}
+{#                                <li class="list-inline-item">Post By Jhon</li>#}
+{#                                <li class="list-inline-item">June 2, 2018</li>#}
+{#                            </ul>#}
+{#                            <h6><a class="text-dark" href="blog-single.html">Lorem ipsum dolor sit amet, consectetur</a>#}
+{#                            </h6>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="widget">#}
+{#                    <h6 class="mb-4">CATEGORIES</h6>#}
+{#                    <ul class="list-inline tag-list">#}
+{#                        <li class="list-inline-item m-1"><a href="blog-single.html">ui ux</a></li>#}
+{#                        <li class="list-inline-item m-1"><a href="blog-single.html">developmetns</a></li>#}
+{#                        <li class="list-inline-item m-1"><a href="blog-single.html">travel</a></li>#}
+{#                        <li class="list-inline-item m-1"><a href="blog-single.html">article</a></li>#}
+{#                        <li class="list-inline-item m-1"><a href="blog-single.html">travel</a></li>#}
+{#                        <li class="list-inline-item m-1"><a href="blog-single.html">ui ux</a></li>#}
+{#                        <li class="list-inline-item m-1"><a href="blog-single.html">article</a></li>#}
+{#                        <li class="list-inline-item m-1"><a href="blog-single.html">developmetns</a></li>#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row masonry-container pt-5">
+                    {% for recipe in recipes %}
+                        <div class="col-sm-6 mb-5">
+                            <article class="text-center">
+                                <img class="img-fluid mb-4" src="{{ recipe.recipe_image.url }}" alt="image">
+                                <p class="text-uppercase mb-2">{{ recipe.category }}</p>
+                                <h4 class="title-border"><p class="text-dark">{{ recipe.recipe_title }}</p></h4>
+                                <p>Posted by {{ recipe.user.get_full_name }} at {{ recipe.created_at }}</p>
+                                <p>{{ recipe.recipe_description|truncatewords:30 }}</p>
+{#                                <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-transparent">read more</a>#}
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- ... (your existing code) ... -->
+            </div>
+            <!-- ... (your existing code) ... -->
+        </div>
+    </div>
+</section>
+
+
+<footer class="bg-secondary">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <a href="index.html"><img src="{% static 'app/images/logo.png' %}" alt="persa"
+                                              class="img-fluid"></a>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <h6>Address</h6>
+                    <ul class="list-unstyled">
+                        <li class="font-secondary text-dark">Sydney</li>
+                        <li class="font-secondary text-dark">6 rip carl Avenue CA 90733</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <h6>Contact Info</h6>
+                    <ul class="list-unstyled">
+                        <li class="font-secondary text-dark">Tel: +90 000 333 22</li>
+                        <li class="font-secondary text-dark">Mail: exmaple@ymail.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <h6>Follow</h6>
+                    <ul class="list-inline d-inline-block">
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-twitter-alt"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-linkedin"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center pb-3">
+        <p class="mb-0">Copyright ©
+            <script>var CurrentYear = new Date().getFullYear()
+            document.write(CurrentYear)</script>
+            a theme by <a href="https://themefisher.com/">themefisher.com</a></p>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="{% static 'app/plugins/jQuery/jquery.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'app/plugins/bootstrap/bootstrap.min.js' %}"></script>
+<!-- slick slider -->
+<script src="{% static 'app/plugins/slick/slick.min.js' %}"></script>
+<!-- masonry -->
+<script src="{% static 'app/plugins/masonry/masonry.js' %}"></script>
+<!-- instafeed -->
+<script src="{% static 'app/plugins/instafeed/instafeed.min.js' %}"></script>
+<!-- smooth scroll -->
+<script src="{% static 'app/plugins/smooth-scroll/smooth-scroll.js' %}"></script>
+<!-- headroom -->
+<script src="{% static 'app/plugins/headroom/headroom.js' %}"></script>
+<!-- reading time -->
+<script src="{% static 'app/plugins/reading-time/readingTime.min.js' %}"></script>
+
+<!-- Main Script -->
+<script src="{% static 'app/js/script.js' %}"></script>
+
+</body>
+</html>
