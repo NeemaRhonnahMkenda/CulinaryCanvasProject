@@ -2,8 +2,10 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
 
 from main_app.app_forms import CreateUserForm, RecipeForm, SearchForm
 from main_app.models import Recipe
@@ -94,6 +96,7 @@ def edit_recipes(request, recipe_id):
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():
+            recipe.created_at = timezone.now()
             form.save()
             messages.success(request, "Post Updated Successfully!")
             return redirect('profile')  # Redirect to the user's profile or any other appropriate page
@@ -115,15 +118,18 @@ def search_view(request):
         # Create a Q object to combine queries for each word
         q_objects = Q()
 
-        # Add a condition for each word in the search query
+        # Add a condition for each word in the search query for recipes
         for word in search_words:
             q_objects |= (
                     Q(recipe_title__icontains=word) |
                     Q(recipe_description__icontains=word) |
-                    Q(category__icontains=word)
+                    Q(category__icontains=word) |
+                    Q(user__username__icontains=word) |  # Search for usernames
+                    Q(user__first_name__icontains=word) |  # Search for first names
+                    Q(user__last_name__icontains=word)  # Search for last names
             )
 
-        # Use the Q object in the filter to get recipes containing any of the words
+        # Use the Q object in the filter to get recipes or users containing any of the words
         results = Recipe.objects.filter(q_objects)
 
     return render(request, 'search.html', {'form': form, 'results': results})
