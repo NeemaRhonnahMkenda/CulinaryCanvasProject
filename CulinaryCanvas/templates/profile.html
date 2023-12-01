@@ -59,7 +59,7 @@
 
 <header class="navigation">
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{% url 'home' %}">
             <img class="img-fluid" style="height: 100px" src="{% static 'app/images/Culinary.png' %}" alt="parsa">Culinary
             Canvas
             {#        <p style="font-size: 30px; color: #fd308c;"><span class="font-weight-bold" style="font-size: 36px; color: darkred;">C</span><i>ulinary</i> <span class="font-weight-bold" style="font-size: 36px; color: darkred;">C</span><i>anvas</i></p>#}
@@ -78,13 +78,13 @@
                     <a class="nav-link text-uppercase text-dark" href="{% url 'category' %}">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase text-dark" href="{% url 'blogPostEntry' %}"><i class="ti-pencil-alt mr-2"></i>Write</a>
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blogPostEntry' %}"><i
+                            class="ti-pencil-alt mr-2"></i>Write</a>
                 </li>
             </ul>
-            <form class="form-inline position-relative ml-lg-4">
-                <input class="form-control px-3 w-100" type="search" placeholder="Search">
-                <!-- <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button> -->
-                <a href="search.html" class="search-icon"><i class="ti-search text-dark"></i></a>
+            <form class="form-inline position-relative ml-lg-4" method="get" action="{% url 'search' %}">
+                <input class="form-control px-3 w-100" type="search" name="query" placeholder="Search">
+                <button type="submit" class="search-icon"><i class="ti-search text-dark"></i></button>
             </form>
         </div>
         <div class="ml-5">
@@ -120,168 +120,36 @@
     </div>
 </section>
 <!-- /hero area -->
-
+{% include 'alerts.html' %}
 <!-- blog post -->
 <section class="section">
     <div class="container">
         <div class="row">
-            <div class="col-12 mb-100">
-                <article data-file="articles/b.html" data-target="article" class="article-full-width">
-                    <div class="post-image">
-                        <img class="img-fluid" src="{% static 'app/images/masonary-post/post-2.jpg' %}"
-                             alt="post-thumb">
-                    </div>
-                    <div class="post-content">
-                        <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
-                            <li class="list-inline-item"><i class="ti-calendar mr-2"></i>June 2, 2018</li>
-                            <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span
-                                    class="eta">8 min</span> read
-                            </li>
-                        </ul>
-                        <h4 class="mb-4"><a href="blog-single.html" class="text-dark">Lorem ipsum dolor sit amet,
-                            consectetur adipisicing
-                            elit</a></h4>
-                        <p class="mb-0 post-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt
-                            ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex
-                            ea commodo consequat.</p>
-                        <a class="btn btn-transparent mb-4" href="blog-single.html">Continue...</a>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 mb-100">
-                <article data-file="articles/b.html" data-target="article" class="article-full-width article-right">
-                    <div class="post-image">
-                        <img class="img-fluid" src="{% static 'app/images/masonary-post/post-3.jpg' %}"
-                             alt="post-thumb">
-                    </div>
-                    <div class="post-content">
-                        <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
-                            <li class="list-inline-item"><i class="ti-calendar mr-2"></i>June 2, 2018</li>
-                            <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span
-                                    class="eta">8 min</span> read
-                            </li>
-                        </ul>
-                        <h4 class="mb-4"><a href="blog-single.html" class="text-dark">Lorem ipsum dolor sit amet,
-                            consectetur adipisicing
-                            elit</a></h4>
-                        <p class="mb-0 post-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt
-                            ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex
-                            ea commodo consequat.</p>
-                        <a class="btn btn-transparent mb-4" href="blog-single.html">Continue...</a>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 mb-100">
-                <article data-file="articles/b.html" data-target="article" class="article-full-width">
-                    <div class="post-image">
-                        <img class="img-fluid" src="{% static 'app/images/masonary-post/post-4.jpg' %}"
-                             alt="post-thumb">
-                    </div>
-                    <div class="post-content">
-                        <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
-                            <li class="list-inline-item"><i class="ti-calendar mr-2"></i>June 2, 2018</li>
-                            <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span
-                                    class="eta">8 min</span> read
-                            </li>
-                        </ul>
-                        <h4 class="mb-4"><a href="blog-single.html" class="text-dark">Lorem ipsum dolor sit amet,
-                            consectetur adipisicing
-                            elit</a></h4>
-                        <p class="mb-0 post-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt
-                            ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex
-                            ea commodo consequat.</p>
-                        <a class="btn btn-transparent mb-4" href="blog-single.html">Continue...</a>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 mb-100">
-                <article data-file="articles/b.html" data-target="article" class="article-full-width article-right">
-                    <div class="post-image">
-                        <img class="img-fluid" src="{% static 'app/images/masonary-post/post-5.jp' %}g"
-                             alt="post-thumb">
-                    </div>
-                    <div class="post-content">
-                        <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
-                            <li class="list-inline-item"><i class="ti-calendar mr-2"></i>June 2, 2018</li>
-                            <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span
-                                    class="eta">8 min</span> read
-                            </li>
-                        </ul>
-                        <h4 class="mb-4"><a href="blog-single.html" class="text-dark">Lorem ipsum dolor sit amet,
-                            consectetur adipisicing
-                            elit</a></h4>
-                        <p class="mb-0 post-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt
-                            ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex
-                            ea commodo consequat.</p>
-                        <a class="btn btn-transparent mb-4" href="blog-single.html">Continue...</a>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 mb-100">
-                <article data-file="articles/b.html" data-target="article" class="article-full-width">
-                    <div class="post-image">
-                        <img class="img-fluid" src="{% static 'app/images/masonary-post/post-6.jpg' %}"
-                             alt="post-thumb">
-                    </div>
-                    <div class="post-content">
-                        <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
-                            <li class="list-inline-item"><i class="ti-calendar mr-2"></i>June 2, 2018</li>
-                            <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span
-                                    class="eta">8 min</span> read
-                            </li>
-                        </ul>
-                        <h4 class="mb-4"><a href="blog-single.html" class="text-dark">Lorem ipsum dolor sit amet,
-                            consectetur adipisicing
-                            elit</a></h4>
-                        <p class="mb-0 post-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt
-                            ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex
-                            ea commodo consequat.</p>
-                        <a class="btn btn-transparent mb-4" href="blog-single.html">Continue...</a>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 mb-100">
-                <article data-file="articles/b.html" data-target="article" class="article-full-width article-right">
-                    <div class="post-image">
-                        <img class="img-fluid" src="{% static 'app/images/masonary-post/post-1.jpg' %}"
-                             alt="post-thumb">
-                    </div>
-                    <div class="post-content">
-                        <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
-                            <li class="list-inline-item"><i class="ti-calendar mr-2"></i>June 2, 2018</li>
-                            <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span
-                                    class="eta">8 min</span> read
-                            </li>
-                        </ul>
-                        <h4 class="mb-4"><a href="blog-single.html" class="text-dark">Lorem ipsum dolor sit amet,
-                            consectetur adipisicing
-                            elit</a></h4>
-                        <p class="mb-0 post-summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt
-                            ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex
-                            ea commodo consequat.</p>
-                        <a class="btn btn-transparent mb-4" href="blog-single.html">Continue...</a>
-                    </div>
-                </article>
-            </div>
+            {% for recipe in user_recipes %}
+                <div class="col-12 mb-100">
+                    <article data-file="{{ recipe.recipe_image.url }}" data-target="article" class="article-full-width">
+                        <div class="post-image">
+                            <img class="img-fluid" src="{{ recipe.recipe_image.url }}" alt="post-thumb">
+                        </div>
+                        <div class="post-content">
+                            <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
+                                <li class="list-inline-item"><i
+                                        class="ti-calendar mr-2"></i>{{ recipe.created_at|date:"F j, Y" }}</li>
+                            </ul>
+                            <h4 class="mb-4"><a href="" class="text-dark">{{ recipe.recipe_title }}</a></h4>
+                            <p class="mb-0 post-summary">{{ recipe.recipe_description|truncatewords:40 }}</p>
+                            <a class="btn btn-transparent mb-4" href="{% url 'blogSingle' recipe.id %}">Read Post...</a>
+                            <a class="btn btn-transparent mb-4" href="{% url 'edit_recipes' recipe.id %}">Edit Post<i
+                                    class="fa-edit ti-pencil ml-2"></i></a>
+                            <a href="{% url 'delete_post' recipe.id %}" class="btn btn-transparent mb-4 delete-post-btn text-danger">
+                                Delete Post<i class="fa-edit ti-trash ml-2"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
         </div>
+        <!-- Pagination or other elements can be added here if needed -->
         <div class="row">
             <div class="col-12">
                 <nav>
@@ -308,6 +176,7 @@
 </section>
 <!-- /blog post -->
 
+
 <!-- instagram -->
 <section>
     <div class="container-fluid px-0">
@@ -322,31 +191,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-                    <a href="index.html"><img src="{% static 'app/images/logo.png' %}" alt="persa"
-                                              class="img-fluid"></a>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
                     <h6>Address</h6>
                     <ul class="list-unstyled">
-                        <li class="font-secondary text-dark">Sydney</li>
-                        <li class="font-secondary text-dark">6 rip carl Avenue CA 90733</li>
+                        <li class="font-secondary text-dark">Nairobi</li>
+                        <li class="font-secondary text-dark">Safari Park Avenue</li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
                     <h6>Contact Info</h6>
                     <ul class="list-unstyled">
-                        <li class="font-secondary text-dark">Tel: +90 000 333 22</li>
-                        <li class="font-secondary text-dark">Mail: exmaple@ymail.com</li>
+                        <li class="font-secondary text-dark">Tel: +254 796 403 061</li>
+                        <li class="font-secondary text-dark">Mail: nmkenda98@gmail.com</li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
                     <h6>Follow</h6>
                     <ul class="list-inline d-inline-block">
-                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-facebook"></i></a></li>
-                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-twitter-alt"></i></a>
+                        <li class="list-inline-item"><a href="https://twitter.com/nemz__" target="_blank"
+                                                        class="text-dark"><i class="ti-twitter-alt"></i></a>
                         </li>
-                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-linkedin"></i></a></li>
-                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-github"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/in/neema-mkenda-bb52b4200/"
+                                                        target="_blank" class="text-dark"><i
+                                class="ti-linkedin"></i></a></li>
+                        <li class="list-inline-item"><a href="https://github.com/NeemaRhonnahMkenda" target="_blank"
+                                                        class="text-dark"><i class="ti-github"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -356,7 +224,7 @@
         <p class="mb-0">Copyright ©
             <script>var CurrentYear = new Date().getFullYear()
             document.write(CurrentYear)</script>
-            a theme by <a href="https://themefisher.com/">themefisher.com</a></p>
+            a Project by <a href="https://themefisher.com/">Neema Rhonnah Mkenda</a></p>
     </div>
 </footer>
 

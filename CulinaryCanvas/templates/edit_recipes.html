@@ -19,6 +19,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <!-- theme meta -->
+    <meta name="theme-name" content="parsa"/>
+
     <!-- ** Plugins Needed for the Project ** -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{% static 'app/plugins/bootstrap/bootstrap.min.css' %}">
@@ -71,7 +74,8 @@
                     <a class="nav-link text-uppercase text-dark" href="{% url 'category' %}">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase text-dark" href="#"><i class="ti-pencil-alt mr-2"></i>Write</a>
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blogPostEntry' %}"><i
+                            class="ti-pencil-alt mr-2"></i>Write</a>
                 </li>
             </ul>
             <form class="form-inline position-relative ml-lg-4" method="get" action="{% url 'search' %}">
@@ -99,11 +103,11 @@
 
 <!-- Centered form -->
   <div class="container mt-5 justify-content-center m-auto">
-    <h2 class="mb-4">Add a New Recipe</h2>
-    <form method="post" enctype="multipart/form-data">
+    <h2 class="mb-4">Edit Recipe</h2>
+    <form method="post" action="{% url 'edit_recipes' recipe.id %}" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form | crispy }}
-      <button type="submit" class="btn btn-primary mb-30">Submit</button>
+      <button type="submit" class="btn btn-primary mb-30">Save</button>
     </form>
   </div>
 
@@ -154,7 +158,7 @@
             a Project by <a href="https://themefisher.com/">Neema Rhonnah Mkenda</a></p>
     </div>
 </footer>
-<br>
+
 <!-- jQuery -->
 <script src="{% static 'app/plugins/jQuery/jquery.min.js' %}"></script>
 <!-- Bootstrap JS -->

@@ -16,3 +16,7 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = "__all__"
         exclude = ['user']
+
+
+class SearchForm(forms.Form):
+    query = forms.CharField(label='Search', max_length=100)
