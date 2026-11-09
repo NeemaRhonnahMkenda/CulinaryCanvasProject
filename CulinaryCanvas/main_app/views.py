@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 from django.utils import timezone
 
 from main_app.app_forms import CreateUserForm, RecipeForm, SearchForm
@@ -45,11 +46,14 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 
+@login_required(login_url='login')
 def profile(request):
     user_recipes = Recipe.objects.filter(user=request.user)
     return render(request, 'profile.html', {'user': request.user, 'user_recipes': user_recipes})
 
 
+@login_required(login_url='login')
+@require_POST  # a plain link (or another site) can't delete posts
 def delete_post(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
     recipe.delete()
@@ -90,8 +94,10 @@ def blogSingle(request, recipe_id):
                   {'user': request.user, 'recipe': recipe, 'latest_recipes': latest_recipes})
 
 
+@login_required(login_url='login')
 def edit_recipes(request, recipe_id):
-    recipe = get_object_or_404(Recipe, id=recipe_id)
+    # Only the author can edit; anyone else gets a 404 (no hint the recipe exists).
+    recipe = get_object_or_404(Recipe, id=recipe_id, user=request.user)
 
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES, instance=recipe)

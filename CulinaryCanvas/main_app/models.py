@@ -8,8 +8,10 @@ from django.contrib.auth.decorators import login_required
 
 def unique_img_name(instance, filename):
     name = uuid.uuid4()
-    print(name)
-    ext = filename.split(".")
+    # Keep a real extension (the old code stored ".['photo', 'jpg']"), and only allow image types.
+    ext = filename.rsplit(".", 1)[-1].lower() if "." in filename else "jpg"
+    if ext not in {"jpg", "jpeg", "png", "webp", "gif"}:
+        ext = "jpg"
     full_name = f"{name}.{ext}"
 
     return os.path.join('Recipes_images', full_name)

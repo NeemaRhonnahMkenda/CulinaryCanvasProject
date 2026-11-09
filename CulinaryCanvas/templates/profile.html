@@ -141,9 +141,12 @@
                             <a class="btn btn-transparent mb-4" href="{% url 'blogSingle' recipe.id %}">Read Post...</a>
                             <a class="btn btn-transparent mb-4" href="{% url 'edit_recipes' recipe.id %}">Edit Post<i
                                     class="fa-edit ti-pencil ml-2"></i></a>
-                            <a href="{% url 'delete_post' recipe.id %}" class="btn btn-transparent mb-4 delete-post-btn text-danger">
+                            <form method="post" action="{% url 'delete_post' recipe.id %}" class="d-inline" onsubmit="return confirm('Delete this recipe permanently?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-transparent mb-4 delete-post-btn text-danger">
                                 Delete Post<i class="fa-edit ti-trash ml-2"></i>
-                            </a>
+                            </button>
+                            </form>
                         </div>
                     </article>
                 </div>

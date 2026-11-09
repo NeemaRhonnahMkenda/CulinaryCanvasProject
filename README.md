@@ -28,3 +28,26 @@ Welcome to the Culinary Canvas Project! This project is a platform where you can
 ![image](https://github.com/NeemaRhonnahMkenda/CulinaryCanvasProject/assets/115183776/8c6a7ab5-f90d-409c-9625-69d7686c1b80)
 
 ![image](https://github.com/NeemaRhonnahMkenda/CulinaryCanvasProject/assets/115183776/d77554ea-2e64-4624-a0ea-5a13a2a647b7)
+
+## Running it live (PythonAnywhere, shown on the portfolio)
+
+The app is served at `https://neema-portfolio-pearl.vercel.app/culinary-canvas-django`:
+the portfolio proxies that path to PythonAnywhere, where SQLite and uploaded photos are
+stored permanently. A [Next.js rebuild](https://github.com/NeemaRhonnahMkenda/culinary-canvas)
+of the same app runs at `/culinary-canvas`.
+
+Configuration comes from environment variables (nothing secret is committed):
+
+| Variable | Example |
+| --- | --- |
+| `DJANGO_SECRET_KEY` | a long random string |
+| `DJANGO_DEBUG` | `0` in production |
+| `DJANGO_ALLOWED_HOSTS` | `yourname.pythonanywhere.com` |
+| `DJANGO_CSRF_TRUSTED_ORIGINS` | `https://neema-portfolio-pearl.vercel.app,https://yourname.pythonanywhere.com` |
+| `DJANGO_URL_PREFIX` | `culinary-canvas-django` |
+
+Fresh database with demo content: `python manage.py migrate && python manage.py seed_demo`.
+
+Security notes: only a recipe's author can edit or delete it (others get a 404), delete
+is POST-only with a CSRF token, cookies are scoped to the app's path, and the database
+is never committed (`db.sqlite3` is in `.gitignore`).

@@ -21,12 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-jk573thol!8o@hav6@yvsr+ngy93%u10x3d=-mxdqbpjnp)*w("
+# Never commit the real key: set DJANGO_SECRET_KEY on the server.
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-insecure-key-change-me")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "0") == "1"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h.strip()]
+
+# Sites allowed to submit forms here. When the portfolio shows this app, the browser's
+# Origin is the portfolio domain, so it must be listed, e.g. "https://neema-portfolio-pearl.vercel.app".
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",") if o.strip()]
 
 # Application definition
 
@@ -127,9 +132,32 @@ MESSAGE_TAGS = {
     messages.INFO: 'alert-info',
 
 }
-STATIC_URL = "static/"
+# The whole site can live under a path, e.g. /culinary-canvas-django/ on the portfolio.
+URL_PREFIX = os.environ.get("DJANGO_URL_PREFIX", "").strip("/")
+PREFIX = f"/{URL_PREFIX}/" if URL_PREFIX else "/"
 
-MEDIA_URL = "media/"
+STATIC_URL = PREFIX + "static/"
+
+MEDIA_URL = PREFIX + "media/"
+
+LOGIN_URL = "login"
+
+# URLs work with or without a trailing slash (see urls.py), so never redirect to add one.
+APPEND_SLASH = False
+
+# The portfolio and its projects share one domain: keep this app's cookies to itself.
+SESSION_COOKIE_NAME = "cc_sessionid"
+CSRF_COOKIE_NAME = "cc_csrftoken"
+SESSION_COOKIE_PATH = PREFIX
+CSRF_COOKIE_PATH = PREFIX
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_HTTPONLY = True  # forms carry the token in the page; scripts never need the cookie
+# Flash messages live in the session instead of a site-wide "messages" cookie.
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+X_FRAME_OPTIONS = "DENY"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

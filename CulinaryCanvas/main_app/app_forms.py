@@ -14,8 +14,7 @@ class CreateUserForm(UserCreationForm):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = "__all__"
-        exclude = ['user']
+        fields = ['recipe_title', 'category', 'recipe_description', 'recipe_image']
 
 
 class SearchForm(forms.Form):
